@@ -19,7 +19,6 @@ public final class GamePlay {
     }
 
     public int getNumberOfCompletedRounds() {
-
         numberOfCompletedRounds = playerScore + computerScore;
         return numberOfCompletedRounds;
     }

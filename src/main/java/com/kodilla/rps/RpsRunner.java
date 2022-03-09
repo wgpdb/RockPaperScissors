@@ -19,11 +19,21 @@ public final class RpsRunner {
 
             while (true) {
 
-                gamePlay.setNumberOfRounds();
+                try {
+                    gamePlay.setNumberOfRounds();
+                } catch (Exception e) {
+                    System.out.println("Invalid entry");
+                    continue;
+                }
 
                 while (true) {
 
-                    player.setPlayerMove();
+                    try {
+                        player.setPlayerMove();
+                    } catch (Exception e) {
+                        System.out.println("Invalid entry");
+                        continue;
+                    }
 
                     gamePlay.setPlayerMoveName();
 
