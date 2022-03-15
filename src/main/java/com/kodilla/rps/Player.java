@@ -2,39 +2,54 @@ package com.kodilla.rps;
 
 import java.util.Scanner;
 
-public final class Player {
+public class Player {
 
     private String playerName;
-    private static int playerMove;
+    private int playerMoveEntry;
+    public GamePlay.Move playerMove;
+
+    static Scanner scanner = new Scanner(System.in);
 
     public String getPlayerName() {
         return playerName;
     }
 
-    public static int getPlayerMove() {
+    public GamePlay.Move getPlayerMove() {
         return playerMove;
     }
 
     public void setPlayerName() {
 
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Enter player name:");
         playerName = scanner.next();
+        scanner.nextLine();
     }
 
-    public void setPlayerMove() {
-
-        Scanner scanner = new Scanner(System.in);
+    public GamePlay.Move playerMove() throws InvalidEntryException {
 
         while (true) {
             System.out.println("\n" + getPlayerName() + ", select your move" + "\n" + "Enter 1 for rock, 2 for " +
                     "paper, 3 for scissors");
-            playerMove = scanner.nextInt();
 
-            if (playerMove == 1 || playerMove == 2 || playerMove == 3) {
+            try {
+                playerMoveEntry = scanner.nextInt();
+            } catch (Exception e) {
+                throw new InvalidEntryException();
+            } finally {
+                scanner.nextLine();
+            }
+
+            if (playerMoveEntry == 1 || playerMoveEntry == 2 || playerMoveEntry == 3) {
                 break;
             }
             System.out.println("\"" + playerMove + "\"" + " is not a valid move");
         }
+
+        switch (playerMoveEntry) {
+            case 1 : return playerMove = GamePlay.Move.ROCK;
+            case 2 : return playerMove = GamePlay.Move.PAPER;
+            case 3 : return playerMove = GamePlay.Move.SCISSORS;
+        }
+        return playerMove;
     }
 }

@@ -1,6 +1,6 @@
 package com.kodilla.rps;
 
-public final class RpsRunner {
+public class RpsRunner {
 
     public static void main(String[] args) {
 
@@ -21,7 +21,7 @@ public final class RpsRunner {
 
                 try {
                     gamePlay.setNumberOfRounds();
-                } catch (Exception e) {
+                } catch (InvalidEntryException e) {
                     System.out.println("Invalid entry");
                     continue;
                 }
@@ -29,23 +29,19 @@ public final class RpsRunner {
                 while (true) {
 
                     try {
-                        player.setPlayerMove();
-                    } catch (Exception e) {
+                        player.playerMove();
+                    } catch (InvalidEntryException e) {
                         System.out.println("Invalid entry");
                         continue;
                     }
 
-                    gamePlay.setPlayerMoveName();
+                    System.out.println(player.getPlayerName() + " selected " + player.getPlayerMove());
 
-                    System.out.println(player.getPlayerName() + " selected " + gamePlay.getPlayerMoveName());
+                    computer.computerMove();
 
-                    computer.setComputerMove();
+                    System.out.println("Computer selected " + computer.getComputerMove());
 
-                    gamePlay.setComputerMoveName();
-
-                    System.out.println("Computer selected " + gamePlay.getComputerMoveName());
-
-                    gamePlay.roundResult(Player.getPlayerMove(), Computer.getComputerMove());
+                    gamePlay.roundResult(player.getPlayerMove(), computer.getComputerMove());
 
                     gamePlay.showScore(player.getPlayerName());
 
@@ -54,9 +50,10 @@ public final class RpsRunner {
                         break;
                     }
                 }
+
                 gamePlay.breakOrExit();
 
-                if (gamePlay.isBreakOrExit() == true) {
+                if (gamePlay.isBreakOrExit()) {
                     gamePlay.resetScore();
                     break;
                 }

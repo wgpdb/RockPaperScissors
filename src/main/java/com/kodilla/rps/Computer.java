@@ -2,17 +2,26 @@ package com.kodilla.rps;
 
 import java.util.Random;
 
-public final class Computer {
+public class Computer {
 
-    private static int computerMove;
+    private int computerMoveEntry;
+    private GamePlay.Move computerMove;
 
-    public static int getComputerMove() {
+    public GamePlay.Move getComputerMove() {
         return computerMove;
     }
 
-    public void setComputerMove() {
+    public GamePlay.Move computerMove() {
 
-        Random moveGenerator = new Random();
-        computerMove = moveGenerator.nextInt(3) + 1;
+        Random random = new Random();
+
+        computerMoveEntry = random.nextInt(3) + 1;
+
+        switch (computerMoveEntry) {
+            case 1 : return computerMove = GamePlay.Move.ROCK;
+            case 2 : return computerMove = GamePlay.Move.PAPER;
+            case 3 : return computerMove = GamePlay.Move.SCISSORS;
+        }
+        return computerMove;
     }
 }

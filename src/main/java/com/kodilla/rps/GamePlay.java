@@ -2,14 +2,12 @@ package com.kodilla.rps;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-public final class GamePlay {
+import static com.kodilla.rps.Player.scanner;
 
-    private int numberOfRounds;
-    private int numberOfCompletedRounds;
-    private String playerMoveName;
-    private String computerMoveName;
+public class GamePlay {
+
+    public int numberOfRounds;
     private int playerScore = 0;
     private int computerScore = 0;
     private boolean newGame;
@@ -19,16 +17,7 @@ public final class GamePlay {
     }
 
     public int getNumberOfCompletedRounds() {
-        numberOfCompletedRounds = playerScore + computerScore;
-        return numberOfCompletedRounds;
-    }
-
-    public String getPlayerMoveName() {
-        return playerMoveName;
-    }
-
-    public String getComputerMoveName() {
-        return computerMoveName;
+        return playerScore + computerScore;
     }
 
     public int getPlayerScore() {
@@ -43,14 +32,23 @@ public final class GamePlay {
         return newGame;
     }
 
-    public int setNumberOfRounds() {
+    public enum Move {
+        ROCK, PAPER, SCISSORS
+    }
 
-        Scanner scanner = new Scanner(System.in);
+    public int setNumberOfRounds() throws InvalidEntryException {
 
         while (true) {
 
             System.out.println("\n" + "How many rounds would you like to play?");
-            numberOfRounds = scanner.nextInt();
+
+            try {
+                numberOfRounds = scanner.nextInt();
+            } catch (Exception e) {
+                throw new InvalidEntryException();
+            } finally {
+                scanner.nextLine();
+            }
 
             if (numberOfRounds % 2 != 0 && numberOfRounds >= 1 && numberOfRounds <= 15) {
                  break;
@@ -67,36 +65,12 @@ public final class GamePlay {
         return numberOfRounds;
     }
 
-    public String setPlayerMoveName() {
+    public void roundResult(Move playerMove, Move computerMove) {
 
-        if (Player.getPlayerMove() == 1) {
-            playerMoveName = "Rock";
-        } else if (Player.getPlayerMove() == 2) {
-            playerMoveName = "Paper";
-        } else if (Player.getPlayerMove() == 3) {
-            playerMoveName = "Scissors";
-        }
-        return playerMoveName;
-    }
-
-    public String setComputerMoveName() {
-
-        if (Computer.getComputerMove() == 1) {
-            computerMoveName = "Rock";
-        } else if (Computer.getComputerMove() == 2) {
-            computerMoveName = "Paper";
-        } else if (Computer.getComputerMove() == 3) {
-            computerMoveName = "Scissors";
-        }
-        return computerMoveName;
-    }
-
-    public void roundResult(int playerMove, int computerMove) {
-
-        Map<Integer, Integer> winningCombinations = new HashMap<>();
-        winningCombinations.put(1, 3);
-        winningCombinations.put(2, 1);
-        winningCombinations.put(3, 2);
+        Map<Move, Move> winningCombinations = new HashMap<>();
+        winningCombinations.put(Move.ROCK, Move.SCISSORS);
+        winningCombinations.put(Move.PAPER, Move.ROCK);
+        winningCombinations.put(Move.SCISSORS, Move.PAPER);
 
         if (playerMove == computerMove) {
             System.out.println("It's a tie! \n");
@@ -132,17 +106,15 @@ public final class GamePlay {
 
     public void breakOrExit() {
 
-        Scanner scanner = new Scanner(System.in);
-
         while (true) {
 
             System.out.println("\n" + "Select \"n\" to start a new game or \"e\" to exit");
-            String newGameOrExit = scanner.next();
+            String newGameOrExit = scanner.nextLine();
 
             if (newGameOrExit.equals("n")) {
 
                 System.out.println("Are you sure you would like to start a new game? y/n");
-                String confirmYesOrNo = scanner.next();
+                String confirmYesOrNo = scanner.nextLine();
 
                 if (confirmYesOrNo.equals("y")) {
                     newGame = true;
@@ -156,7 +128,7 @@ public final class GamePlay {
             } else if (newGameOrExit.equals("e")) {
 
                 System.out.println("Are you sure you would like to exit? y/n");
-                String confirmYesOrNo = scanner.next();
+                String confirmYesOrNo = scanner.nextLine();
 
                 if (confirmYesOrNo.equals("y")) {
                     System.exit(0);
@@ -166,6 +138,7 @@ public final class GamePlay {
                 System.out.println("\"" + confirmYesOrNo + "\"" + " is not a valid selection");
             }
             System.out.println("\"" + newGameOrExit + "\"" + " is not a valid selection");
+            Player.scanner.next();
         }
     }
 }
