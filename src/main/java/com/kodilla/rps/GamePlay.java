@@ -36,7 +36,7 @@ public class GamePlay {
         ROCK, PAPER, SCISSORS
     }
 
-    public int setNumberOfRounds() throws InvalidEntryException {
+    public int setNumberOfRounds() {
 
         while (true) {
 

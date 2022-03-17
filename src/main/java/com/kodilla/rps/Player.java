@@ -25,7 +25,7 @@ public class Player {
         scanner.nextLine();
     }
 
-    public GamePlay.Move playerMove() throws InvalidEntryException {
+    public GamePlay.Move playerMove() {
 
         while (true) {
             System.out.println("\n" + getPlayerName() + ", select your move" + "\n" + "Enter 1 for rock, 2 for " +
