@@ -32,10 +32,6 @@ public class GamePlay {
         return newGame;
     }
 
-    public enum Move {
-        ROCK, PAPER, SCISSORS
-    }
-
     public int setNumberOfRounds() {
 
         while (true) {
@@ -65,6 +61,18 @@ public class GamePlay {
         return numberOfRounds;
     }
 
+    public static Move moveSwitch(int move) {
+
+        Move outputMove = switch (move) {
+            case 1 -> Move.ROCK;
+            case 2 -> Move.PAPER;
+            case 3 -> Move.SCISSORS;
+            default -> null;
+        };
+
+        return outputMove;
+    }
+
     public void roundResult(Move playerMove, Move computerMove) {
 
         Map<Move, Move> winningCombinations = new HashMap<>();
@@ -91,8 +99,8 @@ public class GamePlay {
 
     public void resetScore() {
 
-        playerScore -= getPlayerScore();
-        computerScore -= getComputerScore();
+        playerScore = 0;
+        computerScore = 0;
     }
 
     public void winOrLoose(String playerName) {

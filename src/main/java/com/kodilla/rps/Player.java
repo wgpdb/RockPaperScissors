@@ -6,7 +6,7 @@ public class Player {
 
     private String playerName;
     private int playerMoveEntry;
-    public GamePlay.Move playerMove;
+    public Move playerMove;
 
     static Scanner scanner = new Scanner(System.in);
 
@@ -14,7 +14,7 @@ public class Player {
         return playerName;
     }
 
-    public GamePlay.Move getPlayerMove() {
+    public Move getPlayerMove() {
         return playerMove;
     }
 
@@ -25,7 +25,7 @@ public class Player {
         scanner.nextLine();
     }
 
-    public GamePlay.Move playerMove() {
+    public Move playerMove() {
 
         while (true) {
             System.out.println("\n" + getPlayerName() + ", select your move" + "\n" + "Enter 1 for rock, 2 for " +
@@ -44,12 +44,8 @@ public class Player {
             }
             System.out.println("\"" + playerMove + "\"" + " is not a valid move");
         }
+        playerMove = GamePlay.moveSwitch(playerMoveEntry);
 
-        switch (playerMoveEntry) {
-            case 1 : return playerMove = GamePlay.Move.ROCK;
-            case 2 : return playerMove = GamePlay.Move.PAPER;
-            case 3 : return playerMove = GamePlay.Move.SCISSORS;
-        }
         return playerMove;
     }
 }
