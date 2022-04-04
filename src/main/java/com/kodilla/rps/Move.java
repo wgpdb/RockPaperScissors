@@ -1,5 +1,5 @@
 package com.kodilla.rps;
 
-public enum Move {
+enum Move {
     ROCK, PAPER, SCISSORS
 }

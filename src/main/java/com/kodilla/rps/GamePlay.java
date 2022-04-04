@@ -5,9 +5,9 @@ import java.util.Map;
 
 import static com.kodilla.rps.Player.scanner;
 
-public class GamePlay {
+class GamePlay {
 
-    public int numberOfRounds;
+    private int numberOfRounds;
     private int playerScore = 0;
     private int computerScore = 0;
     private boolean newGame;

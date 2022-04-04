@@ -1,4 +1,4 @@
 package com.kodilla.rps;
 
-public class InvalidEntryException extends RuntimeException {
+class InvalidEntryException extends RuntimeException {
 }

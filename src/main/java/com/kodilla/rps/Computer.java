@@ -2,7 +2,7 @@ package com.kodilla.rps;
 
 import java.util.Random;
 
-public class Computer {
+class Computer {
 
     private int computerMoveEntry;
     private Move computerMove;

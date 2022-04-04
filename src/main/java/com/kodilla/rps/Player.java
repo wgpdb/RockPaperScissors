@@ -2,11 +2,11 @@ package com.kodilla.rps;
 
 import java.util.Scanner;
 
-public class Player {
+class Player {
 
     private String playerName;
     private int playerMoveEntry;
-    public Move playerMove;
+    private Move playerMove;
 
     static Scanner scanner = new Scanner(System.in);
 

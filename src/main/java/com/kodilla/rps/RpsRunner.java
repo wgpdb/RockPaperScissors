@@ -1,6 +1,6 @@
 package com.kodilla.rps;
 
-public class RpsRunner {
+class RpsRunner {
 
     public static void main(String[] args) {
 
